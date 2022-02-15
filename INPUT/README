@@ -1,0 +1,14 @@
+we need 4 files:
+complex.gro
+complex.top
+
+lig.gro
+lig.top
+
+and charmmFF named :
+charmm36-jul2020.ff
+
+
+or copy everything from /example/ here:
+
+cp -a example/* .

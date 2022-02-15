@@ -1,0 +1,102 @@
+;====================================================
+; Production simulation
+;====================================================
+
+;----------------------------------------------------
+; RUN CONTROL
+;----------------------------------------------------
+integrator   = md            ; stochastic leap-frog integrator
+nsteps       = 5000000       ; 2 * 5,000,000 fs = 10,000 ps
+dt           = 0.002         ; 2 fs
+comm-mode    = Linear        ; remove center of mass translation
+nstcomm      = 100           ; frequency for center of mass motion removal
+;mts = yes 
+;----------------------------------------------------
+; OUTPUT CONTROL
+;----------------------------------------------------
+nstxout                = 0          ; don't save coordinates to .trr
+nstvout                = 0          ; don't save velocities to .trr
+nstfout                = 0          ; don't save forces to .trr
+nstxout-compressed     = 5000       ; xtc compressed trajectory output every 1000 steps (2 ps)
+compressed-x-precision = 5000       ; precision with which to write to the compressed trajectory file
+nstlog                 = 1000       ; update log file every 2 ps
+nstenergy              = 1000       ; save energies every 2 ps
+nstcalcenergy          = 100        ; calculate energies every 100 steps
+
+;----------------------------------------------------
+; BONDS
+;----------------------------------------------------
+constraint_algorithm   = lincs      ; holonomic constraints
+constraints            = h-bonds  ; hydrogens only are constrained
+lincs_iter             = 1          ; accuracy of LINCS (1 is default)
+lincs_order            = 4          ; also related to accuracy (4 is default)
+lincs-warnangle        = 30         ; maximum angle that a bond can rotate before LINCS will complain (30 is default)
+continuation           = yes        
+
+;----------------------------------------------------
+; NEIGHBOR SEARCHING
+;----------------------------------------------------
+cutoff-scheme   = Verlet
+ns-type         = grid   ; search neighboring grid cells
+nstlist         = 100     ; 20 fs (default is 10)
+rlist           = 1.2    ; short-range neighborlist cutoff (in nm)
+pbc             = xyz    ; 3D PBC
+
+;----------------------------------------------------
+; ELECTROSTATICS
+;----------------------------------------------------
+coulombtype      = PME      ; Particle Mesh Ewald for long-range electrostatics
+rcoulomb         = 1.2      ; short-range electrostatic cutoff (in nm)
+ewald_geometry   = 3d       ; Ewald sum is performed in all three dimensions
+pme-order        = 4        ; interpolation order for PME (default is 4)
+fourierspacing   = 0.10     ; grid spacing for FFT
+ewald-rtol       = 1e-6     ; relative strength of the Ewald-shifted direct potential at rcoulomb
+
+;----------------------------------------------------
+; VDW
+;----------------------------------------------------
+vdw-type                = cutoff
+rvdw                    = 1.2
+rvdw-switch		= 1.0
+vdw-modifier            = force-switch
+;ewald-rtol-lj           = 1e-3
+;lj-pme-comb-rule        = Geometric
+DispCorr                = no
+
+;----------------------------------------------------
+; TEMPERATURE & PRESSURE COUPL
+;----------------------------------------------------
+tc_grps          = System
+tau_t            = 1.0
+ref_t            = 300
+pcoupl           = Parrinello-Rahman
+pcoupltype       = isotropic            ; uniform scaling of box vectors
+tau_p            = 2                    ; time constant (ps)
+ref_p            = 1.0                  ; reference pressure (bar)
+compressibility  = 4.5e-05              ; isothermal compressibility of water (bar^-1)
+
+; Temperature coupling
+tcoupl                  = V-rescale                     ; modified Berendsen thermostat
+
+;----------------------------------------------------
+; VELOCITY GENERATION
+;----------------------------------------------------
+gen_vel      = no       ; Velocity generation is off
+
+
+;----------------------------------------------------
+; FREE ENERGY CALCULATIONS
+;----------------------------------------------------
+free-energy              = yes
+couple-moltype           = XXXX
+couple-lambda0           = vdw-q
+couple-lambda1           = none
+couple-intramol          = no
+separate-dhdl-file       = yes
+sc-alpha                 = 0.5
+sc-power                 = 1
+sc-sigma                 = 0.3
+init-lambda-state        = $LAMBDA$
+bonded-lambdas           = 0.0 0.0001 0.001 0.01 0.1 0.2 0.3 0.5 0.75 1.0
+nstdhdl                  = 100
+calc-lambda-neighbors    = -1

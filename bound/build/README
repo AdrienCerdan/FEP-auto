@@ -1,0 +1,14 @@
+Here, one can setup the simulation box, run an unbiased MD simulation and produce the cluster center use to determine de VBA and confinement of the ligands.
+- The files complex.top and complex.gro, containing the protein-ligand complex should be placed in ../INPUT, and the folder containing the forcefield, linked here.
+- If necessary, one can modify the gromacs inputs in MDP/
+- USE: ./setup-run-bound.sh
+
+OR
+
+If the system (including water, ions, co-factors, etc) was already setup, it is possible to copy here some files to directly go to FEP:
+- One need to copy a complete coordinate files "prod.gro", a complete topology file "bound.top", the relevante parameters files .itp inside a forcefiled folder, and a reference .pdb containing the ligand coordinate to confine "ref-ligand.pdb", and a reference coordinates for the complex cluster: "ref-complex.gro" and "ref-complex.pdb".
+
+OR
+
+It is also possible to provide the system "prod-center.xtc", "prod.gro", and "bound.top", to run the clustering:
+- USE: ./make_cluster.sh 

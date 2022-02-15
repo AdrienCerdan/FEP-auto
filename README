@@ -1,0 +1,23 @@
+
+#######################################################################################
+############################## IMPORTANT ##############################################
+#######################################################################################
+
+take extra care to copy all the files and folders, including the symbolink links !!
+
+Suggested command:
+
+rsync -auvlP FEP-auto/ new_directory_name/
+
+#######################################################################################
+
+
+
+ go to /INPUT/ and copy the required files
+
+then
+ go to /bound/ and follow the instructions
+
+then
+ go to /unbound/ and follow the instructions
+

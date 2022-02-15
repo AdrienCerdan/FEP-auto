@@ -1,0 +1,16 @@
+[ intermolecular_interactions]
+[ bonds ]
+; ai     aj    type   bA      kA     bB      kB
+ L1111   P1111   6      R1111    0.0    R1111    10000.0
+
+[ angles ]
+; ai     aj    ak     type    thA      fcA        thB      fcB
+ L1111  P1111   P2222  1       A1111       0.0        A1111       1000.0
+ L2222  L1111   P1111  1       A2222       0.0        A2222      1000.0
+
+[ dihedrals ]
+; ai     aj    ak    al    type     thA      fcA       thB      fcB
+L2222  L1111   P1111   P2222    2      D1111      0.0    D1111      1000.0
+L1111  P1111   P2222   P3333    2      D2222      0.0    D2222      1000.0
+L3333  L2222   L1111   P1111    2      D3333      0.0    D3333      1000.0
+

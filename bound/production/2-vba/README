@@ -1,0 +1,17 @@
+- To modify the simulation paramters go to MDP/
+ and modify enmin.mdp nvt.mdp npt.mdp prod.mdp
+
+- The lambda plan should be change equivalently in all four .mdp files.
+
+- After modifying one or several .mdp files, one should execute MDP/ ./mk_mdp.sh
+
+#######################
+
+To run:
+
+- run : ./1-measure-vba-gmx.sh
+- run : ./2-run.sh
+- run : ./3-cp_xvg.sh
+
+
+######################

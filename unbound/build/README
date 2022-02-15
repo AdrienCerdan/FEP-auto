@@ -1,0 +1,9 @@
+Here, one can setup the simulation box, run an unbiased MD simulation and produce the cluster center use to determine de VBA and confinement of the ligands.
+- The files lig.top and lig.gro, containing the ligand should be placed in ../INPUT, and the folder containing the forcefield, linked here.
+- If necessary, one can modify the gromacs inputs in MDP/
+- USE: ./setup-run-bound.sh
+
+OR
+
+If the system (including water, ions, co-factors, etc) was already setup, it is possible to copy here some files to directly go to FEP:
+- One need to copy a complete coordinate files "prod.gro", a complete topology file "unbound.top", the relevante parameters files .itp inside a forcefield folder.
