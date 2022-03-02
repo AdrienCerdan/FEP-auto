@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -A  sjf@gpu
+#SBATCH -A  
 #SBATCH --job-name=dlambda           # nom du job
 #SBATCH --ntasks=1                   # nombre total de taches (= nombre de GPU ici)
 #SBATCH --gres=gpu:1                 # nombre de GPU (1/4 des GPU)
